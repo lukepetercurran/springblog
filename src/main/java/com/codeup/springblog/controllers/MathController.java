@@ -12,7 +12,8 @@ public class MathController {
     @GetMapping("/add/{x}/and/{y}")
     @ResponseBody
     public String adding(@PathVariable int x, @PathVariable int y) {
-        return x + " + " + y + " is " + (x + y);
+            return x + " + " + y + " is " + (x + y); // < returns a String if the method is made to
+//        return x + y; < returns an Integer if the method is made to
     }
 
     // Subtraction
