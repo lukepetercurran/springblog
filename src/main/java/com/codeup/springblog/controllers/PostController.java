@@ -32,4 +32,11 @@ public class PostController {
     public String createPost() {
         return "Creates new post.";
     }
+
+    @PostMapping("/posts/edit/{id}")
+    public String editPost(@PathVariable long id, @RequestParam String title, @RequestParam String body) {
+        Post post = postDao.getById(id);
+        post.setTitle(title);
+        post.setBody(body);
+    }
 }
