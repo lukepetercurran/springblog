@@ -22,6 +22,14 @@ public class Ad {
     @JoinColumn(name="user_id")
     private User user;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="ads_categories",
+            joinColumns = {@JoinColumn(name="ad_id")},
+            inverseJoinColumns = {@JoinColumn(name="category_id")}
+    )
+    private List<Category> categories;
+
     public Ad() {
     }
 
@@ -31,6 +39,7 @@ public class Ad {
         this.description = description;
         this.adImage = adImage;
         this.user = user;
+        this.categories = categories;
     }
 
     public long getId() {
@@ -71,5 +80,13 @@ public class Ad {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }
