@@ -4,6 +4,7 @@ CREATE USER springblog_user@localhost IDENTIFIED BY 'p4ssword';
 GRANT ALL ON springblog_db.* TO springblog_user@localhost;
 
 
+
 # USE springblog_db;
 #
 # INSERT INTO ads (id, title, description)

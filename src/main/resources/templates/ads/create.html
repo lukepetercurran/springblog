@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<form action="/ads/create" th:action="@{ad/screate}" method="post" th:object=""${ad}>
+  Title:
+  <input id="title" name ="title" type="text" class="validate" th:field="*{title}" />
+  <br />
+  Description:
+  <textarea id="body" name="body" class="materialize-textarea" th:field="*{description}" />
+  <br />
+  <input type="submit" />
+</form>
+</body>
+</html>
