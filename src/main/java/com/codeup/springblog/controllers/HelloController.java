@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloController {
+
+    public HelloController() {
+
+    }
+
     @GetMapping("/hello") //browser url
     @ResponseBody           // results
     public String hello(){
@@ -26,7 +31,7 @@ public class HelloController {
     @PostMapping("/join")
     public String joinCohort(@RequestParam(name = "cohort") String cohort, Model model) {
         model.addAttribute("cohort", "Welcome to " + cohort + "!");
-        emailSvc.prepareAndSend("test@test.com", "Hello! Welcome to Neptune!", "Thank you for attending our Web Development Program!");
+        emailSvc.prepareAndSend("test@test.com", "Hello! Welcome to " + "!", "Thank you for attending our Web Development Program!");
         return "join";
     }
 

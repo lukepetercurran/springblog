@@ -1,17 +1,23 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.Repositories.UserRepository;
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.Repositories.PostRepository;
 import org.springframework.stereotype.Controller;
+import com.codeup.springblog.models.User;
+import com.codeup.springblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController {
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
@@ -23,6 +29,13 @@ public class PostController {
     @GetMapping("/posts/{id}")
     public String singlePost(@PathVariable long id, Model model) {
         model.addAttribute("post", postDao.getById(id));
+        boolean isPostOwner = false;
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser") {
+            User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            isPostOwner = currentUser.getId() == post.getUser().getId();
+        }
+        model.addAttribute("post", post);
+        model.addAttribute("isPostOwner", isPostOwner);
         return "posts/show";
     }
 
